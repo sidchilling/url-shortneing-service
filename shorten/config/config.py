@@ -2,4 +2,4 @@
 
 class Config(object):
 
-    SERVER_PREFIX = 'http://localhost:8080'
+    SERVER_PREFIX = 'http://sidshorturl.appspot.com'
