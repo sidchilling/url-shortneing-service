@@ -12,5 +12,4 @@ class Visit(db.Model):
     link_id = db.StringProperty(required = True, indexed = True)
     os = db.StringProperty(required = True, indexed = True)
     browser = db.StringProperty(required = True, indexed = True)
-    ua_string = db.StringProperty()
-    date = db.DateTimeProperty(auto_now_add = True)
+    count = db.IntegerProperty()

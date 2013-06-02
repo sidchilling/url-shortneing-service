@@ -71,10 +71,25 @@ class GetShortURL(webapp2.RequestHandler):
 				'short_url' : '%s/r/%s' %(Config.SERVER_PREFIX, link_id),
 				}
 			    }
-		except:
+		except Exception as e:
+		    logging.exception('exception: %s' %(e))
 		    response = self._make_error_response(reason = 'Unexpected error')
 	self.response.headers['Content-Type'] = 'application/json'
 	self.response.write(json.dumps(response))
+
+class Analytics(webapp2.RequestHandler):
+    def get(self):
+	user = users.get_current_user()
+	if not user:
+	    self.redirect(users.create_login_url(self.request.uri))
+	else:
+	    (data, os_browser_list) = services.get_analytics(user = user)
+	    template_values = {
+		    'data' : data,
+		    'os_browser_list' : os_browser_list
+		    }
+	    template = JINJA_ENVIRONMENT.get_template('html/analytics.html')
+	    self.response.write(template.render(template_values))
 
 class UserDetails(webapp2.RequestHandler):
     def post(self):

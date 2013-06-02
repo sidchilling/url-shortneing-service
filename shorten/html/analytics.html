@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+{% autoescape true %}
+<html>
+    <head>
+	<title>Siddharth's Bitly</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap-responsive.min.css" />
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/libs/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/libs/jquery.tmpl.js"></script>
+	<script type="text/javascript" src="/js/libs/underscore-min.js"></script>
+	<script type="text/javascript" src="/js/libs/json2.js"></script>
+	<script type="text/javascript" src="/js/libs/backbone-min.js"></script>
+	
+    </head>
+    <body>
+	<div class="container">
+	    <div class="row-fluid">
+		<div class="span12" style="padding-top: 50px;">
+		    <div class="data_table">
+			<table class="table table-bordered table-striped">
+			    <thead>
+				<tr>
+				    <th>URL</th>
+				    {% for os_browser in os_browser_list %}
+					<th>{{os_browser}}</th>
+				    {% endfor %}
+				</tr>
+			    </thead>
+			    <tbody>
+				{% for link in data %}
+				    <tr>
+					<td>{{data.get(link).get('original_url')}}</td>
+					{% for os_browser in os_browser_list %}
+					    {% if data.get(link).get('data').get(os_browser) != None %}
+						<td>{{data.get(link).get('data').get(os_browser)}}</td>
+					    {% else %}
+						<td>0</td>
+					    {% endif %}
+					{% endfor %}
+				    </tr>
+				{% endfor %}
+			    </tbody>
+			</table>
+		    </div>
+		</div>
+	    </div>
+	</div>
+    </body>
+</html>
+
+{% endautoescape %}
