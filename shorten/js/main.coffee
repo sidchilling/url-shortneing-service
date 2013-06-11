@@ -1,4 +1,4 @@
 window.main = ->
 	view = new MainBitlyView
-	$(view.el).appendTo '#main'
+	$(view.el).appendTo('#main')
 
